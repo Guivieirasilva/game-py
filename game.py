@@ -14,9 +14,7 @@ class Character:
         return self.__level
 
     def show_details(self):
-        return print(
-            f"Nome: {self.__name}\nVida: {self.__life}\nNível: {self.__level}",
-        )
+        return f"Nome: {self.__name}\nVida: {self.__life}\nNível: {self.__level}"
 
 
 class Hero(Character):
@@ -28,8 +26,7 @@ class Hero(Character):
         return self.__special
 
     def show_details(self):
-        print(f"{super().show_details()}\nHabilidade: {self.get_special()}\n")
-        return
+        return f"{super().show_details()}\nHabilidade: {self.get_special()}\n"
 
 
 class Enemy(Character):
@@ -41,12 +38,27 @@ class Enemy(Character):
         return self.__type
 
     def show_details(self):
-        print(f"{super().show_details()}\nTipo: {self.get_type()}\n")
-        return
+        return f"{super().show_details()}\nTipo: {self.get_type()}\n"
 
 
-hero = Hero("Guilherm", 100, 5, "Kamehamera")
-print(hero.show_details())
+class Game:
+    """Classa Orquestadora do Jogo"""
 
-enemy = Enemy("Black", 100, 4, "SSR")
-print(enemy.show_details())
+    def __init__(self) -> None:
+        self.hero = Hero(name="Guilherme", life=100, level=5, special="Kamehamera")
+        self.enemy = Enemy(name="Black", life=100, level=4, type="SSR")
+
+    def initBatle(self):
+        """Fazer a gestão da batalha"""
+        print("Iniciando a batalha")
+        while self.hero.get_life() > 0 and self.enemy.get_life() > 0:
+            print("\nDetalhe dos personagens: ")
+            print(f"{self.hero.show_details()}")
+            print(f"{self.enemy.show_details()}")
+
+        input("Pressione ENTER para atacar...")
+        escolha = input("1 - Ataque normal | 2 - Especial: ")
+
+
+game = Game()
+game.initBatle()
